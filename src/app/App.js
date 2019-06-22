@@ -6,22 +6,20 @@ import {
   Switch
 } from 'react-router-dom';
 
-import { getCurrentUser } from './util/APIUtils';
-import { ACCESS_TOKEN } from './constants';
+import { getCurrentUser } from '../util/APIUtils';
+import { ACCESS_TOKEN } from '../constants';
 
-import MovieList from './movie/MovieList';
-import NewMovie from './movie/NewMovie';
-import MovieDetail from './movie/moviedetail/MovieDetail';
-import Login from './user/login/Login';
-import Signup from './user/signup/Signup';
-import Profile from './user/profile/Profile';
-import AppHeader from './common/AppHeader';
-import NotFound from './common/NotFound';
-import LoadingIndicator from './common/LoadingIndicator';
-import PrivateRoute from './common/PrivateRoute';
+import MovieList from '../movie/MovieList';
+import NewMovie from '../movie/NewMovie';
+import Login from '../user/login/Login';
+import Signup from '../user/signup/Signup';
+import Profile from '../user/profile/Profile';
+import AppHeader from '../common/AppHeader';
+import NotFound from '../common/NotFound';
+import LoadingIndicator from '../common/LoadingIndicator';
+import PrivateRoute from '../common/PrivateRoute';
 
 import { Layout, notification } from 'antd';
-import TheaterList from "./theater/TheaterList";
 const { Content } = Layout;
 
 class App extends Component {
@@ -65,7 +63,6 @@ class App extends Component {
     this.loadCurrentUser();
   }
 
-  // Handle Logout, Set currentUser and isAuthenticated state which will be passed to other components
   handleLogout(redirectTo="/", notificationType="success", description="You're successfully logged out.") {
     localStorage.removeItem(ACCESS_TOKEN);
 
@@ -82,14 +79,9 @@ class App extends Component {
     });
   }
 
-  /* 
-   This method is called by the Login component after successful login 
-   so that we can load the logged-in user details and set the currentUser &
-   isAuthenticated state, which other components will use to render their JSX
-  */
   handleLogin() {
     notification.success({
-      message: 'Book My SHow',
+      message: 'Book My Show',
       description: "You're successfully logged in.",
     });
     this.loadCurrentUser();
@@ -119,9 +111,7 @@ class App extends Component {
                 <Route path="/users/:username" 
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewMovie} handleLogout={this.handleLogout}></PrivateRoute>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/api/movies/:movieId" component={MovieDetail} handleLogout={this.handleLogout}></PrivateRoute>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/api/theaters/:movieId/:cityId" component={TheaterList} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/movie/new" component={NewMovie} handleLogout={this.handleLogout}></PrivateRoute>
                 <Route component={NotFound}></Route>
               </Switch>
             </div>
