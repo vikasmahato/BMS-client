@@ -113,16 +113,16 @@ class App extends Component {
                   render={(props) => <MovieList isAuthenticated={this.state.isAuthenticated}
                       currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
                 </Route>
-                <Route path="/login" 
-                  render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
-                <Route path="/signup" component={Signup}></Route>
+                <Route path="/login"
+                  render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
+                <Route path="/signup" component={Signup}/>
                 <Route path="/users/:username" 
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewMovie} handleLogout={this.handleLogout}></PrivateRoute>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/api/movies/:movieId" component={MovieDetail} handleLogout={this.handleLogout}></PrivateRoute>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/api/theaters/:movieId/:cityId" component={TheaterList} handleLogout={this.handleLogout}></PrivateRoute>
-                <Route component={NotFound}></Route>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewMovie} handleLogout={this.handleLogout}/>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/api/movies/:movieId/:imdbId" component={MovieDetail} handleLogout={this.handleLogout}/>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/api/theaters/:movieId/:cityId" component={TheaterList} handleLogout={this.handleLogout}/>
+                <Route component={NotFound}/>
               </Switch>
             </div>
           </Content>

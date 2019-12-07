@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { getAllMovies } from '../util/APIUtils';
 import Movie from './Movie';
 import LoadingIndicator  from '../common/LoadingIndicator';
-import { Button, Icon } from 'antd';
+import { Button, Icon, List } from 'antd';
 import { MOVIE_LIST_SIZE } from '../constants';
 import { withRouter } from 'react-router-dom';
 import './MovieList.css';
-import { Row } from 'antd';
-import { chunk } from 'lodash';
 
 class MovieList extends Component {
     constructor(props) {
@@ -83,24 +81,26 @@ class MovieList extends Component {
     }
 
     render() {
-        const movieViews = [];
-        this.state.movies.forEach((movie, movieIndex) => {
-            movieViews.push(<Movie
-                key={movie.id}
-                movie={movie}/>)
-        });
-
-        const movieSections = chunk(movieViews, 3);
-
-        const rows = [];
-        movieSections.forEach((movieSection, rowNum) => {
-            rows.push(<Row key={rowNum} gutter={16}>{movieSection}</Row>)
-        });
-
 
         return (
             <div className="movies-container">
-                {rows}
+
+                <List
+                    grid={{ gutter: 16, xs: 1,
+                        sm: 1,
+                        md: 3,
+                        lg: 3,
+                        xl: 3,
+                        xxl: 3, }}
+                    dataSource={this.state.movies}
+                    renderItem={movie => (
+                        <List.Item>
+                            <Movie
+                                key={movie.id}
+                                movie={movie}/>
+                        </List.Item>
+                    )}
+                />
 
                 {
                     !this.state.isLoading && this.state.movies.length === 0 ? (

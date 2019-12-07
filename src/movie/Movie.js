@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Movie.css';
-import { Card, Col, Radio } from 'antd';
+import { Card, Col } from 'antd';
 import {Link} from "react-router-dom";
 import {OMDB_URI} from "../constants";
 
@@ -55,7 +55,7 @@ class Movie extends Component {
     render() {
         return (
             <Col span={8} style={{marginBottom: '20px'}}>
-                <Link className="movie-link" to={`/api/movies/${this.props.movie.id}`}>
+                <Link className="movie-link" to={`/api/movies/${this.props.movie.id}/${this.props.movie.imdbId}`}>
             <Card
                 hoverable
                 style={{ width: 260, height: 450 }}
