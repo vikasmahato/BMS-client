@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://localhost:5000';
+export const API_BASE_URL = 'http://localhost:8080';
 export const ACCESS_TOKEN = 'accessToken';
 export const OMDB_API_KEY = '489b1374';
 export const OMDB_URI = 'http://www.omdbapi.com/?apikey='+OMDB_API_KEY+'&i=';

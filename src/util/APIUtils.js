@@ -11,6 +11,8 @@ import {
 const request = (options) => {
     const headers = new Headers({
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
     })
     
     if(localStorage.getItem(ACCESS_TOKEN)) {
@@ -27,8 +29,11 @@ const request = (options) => {
                 return Promise.reject(json);
             }
             return json;
-        })
-    );
+        }))
+        .catch(reason => {
+            debugger;
+            console.log(reason)
+        });
 };
 
 export function getAllPolls(page, size) {
@@ -44,7 +49,6 @@ export function getAllPolls(page, size) {
 export function getAllMovies(page, size) {
     page = page || 0;
     size = size || MOVIE_LIST_SIZE;
-
     return request({
         url: API_BASE_URL + "/api/movies?page=" + page + "&size=" + size,
         method: 'GET'
@@ -118,14 +122,14 @@ export function signup(signupRequest) {
 
 export function checkUsernameAvailability(username) {
     return request({
-        url: API_BASE_URL + "/api/user/checkUsernameAvailability?username=" + username,
+        url: API_BASE_URL + "/api/users/checkUsernameAvailability?username=" + username,
         method: 'GET'
     });
 }
 
 export function checkEmailAvailability(email) {
     return request({
-        url: API_BASE_URL + "/api/user/checkEmailAvailability?email=" + email,
+        url: API_BASE_URL + "/api/users/checkEmailAvailability?email=" + email,
         method: 'GET'
     });
 }
@@ -137,7 +141,7 @@ export function getCurrentUser() {
     }
 
     return request({
-        url: API_BASE_URL + "/api/user/me",
+        url: API_BASE_URL + "/api/users/me",
         method: 'GET'
     });
 }
