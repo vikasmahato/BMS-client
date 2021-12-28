@@ -110,8 +110,8 @@ class App extends Component {
             <div className="container">
               <Switch>      
                 <Route exact path="/" 
-                  render={(props) => <MovieList isAuthenticated={this.state.isAuthenticated}
-                      currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
+                  render={(props) =>
+                      <MovieList isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
                 </Route>
                 <Route path="/login"
                   render={(props) => <Login onLogin={this.handleLogin} {...props} />}/>
@@ -120,8 +120,8 @@ class App extends Component {
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewMovie} handleLogout={this.handleLogout}/>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/api/movies/:movieId/:imdbId" component={MovieDetail} handleLogout={this.handleLogout}/>
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/api/theaters/:movieId/:cityId" component={TheaterList} handleLogout={this.handleLogout}/>
+                <Route authenticated={this.state.isAuthenticated} path="/api/movies/:movieId/:imdbId" component={MovieDetail} handleLogout={this.handleLogout}/>
+                <Route authenticated={this.state.isAuthenticated} path="/api/theaters/:movieId/:cityId" component={TheaterList} handleLogout={this.handleLogout}/>
                 <Route component={NotFound}/>
               </Switch>
             </div>
